@@ -10,7 +10,7 @@ resource "proxmox_virtual_environment_vm" "control_plane" {
   }
 
   cpu { cores = 2 }
-  memory { dedicated = 2048 }
+  memory { dedicated = 8192 }
 
   agent { enabled = true }
 
@@ -51,7 +51,7 @@ resource "proxmox_virtual_environment_vm" "workers" {
   }
 
   cpu { cores = 1 }
-  memory { dedicated = 2048 }
+  memory { dedicated = 4096 }
 
   agent { enabled = true }
 

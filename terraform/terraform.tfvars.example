@@ -1,4 +1,4 @@
 proxmox_endpoint  = "https://192.168.1.12:8006"
-proxmox_username  = "root@pam"
-proxmox_password  = "your_password_here"
+proxmox_api_token            = "<user>@pam!terraform=xxx-xxxx"
 ssh_public_key    = "ssh-ed25519 AAAA..."
+proxmox_node      = "pveX"
