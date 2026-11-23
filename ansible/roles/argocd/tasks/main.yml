@@ -4,6 +4,7 @@
     name: python3-kubernetes
     state: present
     update_cache: yes
+    lock_timeout: 300
 
 - name: Créer le namespace ArgoCD
   kubernetes.core.k8s:
@@ -14,10 +15,13 @@
   environment:
     KUBECONFIG: /etc/rancher/k3s/k3s.yaml
 
-- name: Installer Helm
-  shell: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+# The script installs the latest Helm 4, or does nothing if it is already there.
+- name: Installer ou mettre à jour Helm
+  shell: set -o pipefail && curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4 | bash
   args:
-    creates: /usr/local/bin/helm
+    executable: /bin/bash
+  register: helm_install
+  changed_when: "'is already' not in helm_install.stdout"
 
 - name: Ajouter le repo Helm ArgoCD
   kubernetes.core.helm_repository:

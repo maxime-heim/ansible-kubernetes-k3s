@@ -1,14 +1,16 @@
 ---
 
+# Les paquets sont mis à jour par cloud-init au premier boot (package_upgrade,
+# activé par défaut par Proxmox).
 - name: Mise à jour des paquets debian
-  become: true
   apt:
     upgrade: yes
     update_cache: yes
+    lock_timeout: 300
 
 - name: Désactiver le swap
   command: swapoff -a
-  when: ansible_swaptotal_mb > 0
+  when: ansible_facts["swaptotal_mb"] > 0
 
 - name: Supprimer le swap du fstab
   replace:
@@ -38,6 +40,7 @@
       - nfs-common
     state: present
     update_cache: yes
+    lock_timeout: 300
 
 - name: Activer et démarrer iscsid
   systemd:
@@ -46,7 +49,7 @@
     state: started
 
 - name: Configurer sysctl pour Kubernetes
-  sysctl:
+  ansible.posix.sysctl:
     name: "{{ item.key }}"
     value: "{{ item.value }}"
     sysctl_file: /etc/sysctl.d/k8s.conf
