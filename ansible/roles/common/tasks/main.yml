@@ -1,4 +1,11 @@
 ---
+
+- name: Mise à jour des paquets debian
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+
 - name: Désactiver le swap
   command: swapoff -a
   when: ansible_swaptotal_mb > 0
