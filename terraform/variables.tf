@@ -4,13 +4,8 @@ variable "proxmox_endpoint" {
   default     = "https://192.168.1.12:8006"
 }
 
-variable "proxmox_username" {
-  description = "Utilisateur Proxmox, ex: root@pam"
-  type        = string
-}
-
-variable "proxmox_password" {
-  description = "Mot de passe de l'utilisateur Proxmox"
+variable "proxmox_api_token" {
+  description = "API token Proxmox, format: user@realm!tokenid=secret"
   type        = string
   sensitive   = true
 }
@@ -23,7 +18,7 @@ variable "ssh_public_key" {
 variable "template_id" {
   description = "VM ID du template Debian 13 à cloner"
   type        = number
-  default     = 8999
+  default     = 9004
 }
 
 variable "proxmox_node" {
@@ -33,9 +28,9 @@ variable "proxmox_node" {
 }
 
 variable "datastore_id" {
-  description = "Storage Proxmox pour les VMs"
+  description = "Storage Proxmox pour les VMs (ex: local-lvm, local-zfs)"
   type        = string
-  default     = "local"
+  default     = "local-lvm"
 }
 
 variable "network_bridge" {
