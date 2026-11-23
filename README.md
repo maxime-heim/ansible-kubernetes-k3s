@@ -6,7 +6,7 @@ Déploiement d'un cluster k3s sur Proxmox avec Terraform (VMs), Ansible (k3s + A
 
 | Couche | Composant | Version |
 |--------|-----------|---------|
-| Hyperviseur | Proxmox VE | 9.1 |
+| Hyperviseur | Proxmox VE | 9.2.32 |
 | OS VMs | Debian | 13 (Trixie) |
 | Provisioning infra | Terraform | >= 1.6 |
 | Provider Proxmox | bpg/proxmox | non épinglée |
@@ -28,7 +28,7 @@ Ingress : Traefik, fourni par défaut avec k3s.
 | k8s-worker-01 | worker | 201 | 1 | 4 Go | 20 Go |
 | k8s-worker-02 | worker | 202 | 1 | 4 Go | 20 Go |
 
-- IP des VMs : DHCP. Réserver les adresses dans le routeur pour qu'elles ne changent pas.
+- IP des VMs : DHCP.
 - Réseau pods : `10.42.0.0/16` (défaut k3s).
 - Réseau services : `10.43.0.0/16` (défaut k3s).
 

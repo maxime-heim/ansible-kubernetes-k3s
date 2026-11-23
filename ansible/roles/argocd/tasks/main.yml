@@ -36,8 +36,8 @@
     release_namespace: "{{ argocd_namespace }}"
     create_namespace: false
     wait: true
-    wait_timeout: 300s
-    values:
+    timeout: 300s
+    release_values:
       server:
         service:
           type: NodePort
